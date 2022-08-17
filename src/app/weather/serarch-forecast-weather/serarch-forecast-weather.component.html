@@ -1,0 +1,103 @@
+<section class="hero is-medium is-purple">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-5">
+          <div class="column">
+            <div class="field">
+              <label class="label">PESQUISE O CLIMA DIARIO DE SUA CIDADE</label>
+            </div>
+            <form
+              class="control is-expanded flex-container is-flex-direction-row"
+            >
+              <input
+                #cidade
+                id="cidade_"
+                class="input is-medium"
+                type="text"
+                placeholder="Goiânia, BR"
+                autocomplete="off"
+                required
+              />
+              <button
+                (click)="onSubmit(cidade.value)"
+                (click)="cidade.value = ''"
+                type="submit"
+                class="button is-medium"
+              >
+                <span class="icon is-purple-font">
+                  <i class="fas fa-search fa-lg"></i>
+                </span>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section *ngIf="cidadeNome" class="hero">
+  <div class="card-content">
+    <div class="flex-container-center">
+      <h1 style="color: #6a527e" class="title">
+        Temperatura Média em {{ cidadeNome.city.name }},
+        {{ cidadeNome.city.country }}
+      </h1>
+    </div>
+  </div>
+  <div class="column">
+    <div class="hero-body">
+      <div class="container">
+        <div class="columns is-mobile is-centered">
+          <div class="column is-half">
+            <div
+              *ngFor="let forecast of arrayDeMedia"
+              class="columns is-gapless shadow-card is-day"
+            >
+              <article class="column is-4 is-day card-weather-left">
+                <div class="content">
+                  <img
+                    class="image-container"
+                    src="http://openweathermap.org/img/wn/{{
+                      forecast.icon
+                    }}@2x.png"
+                    alt=""
+                  />
+                </div>
+              </article>
+              <div class="column card-weather-right">
+                <article class="card-content">
+                  <div *ngIf="cidadeNome" class="content h1-day">
+                    <h1 class="h1-day">
+                      {{ cidadeNome.city.name }}, {{ cidadeNome.city.country }}
+                    </h1>
+                  </div>
+                  <div class="content h2-day">
+                    <h2 class="h2-day">
+                      {{ forecast.tempMedia | number: "1.2-2" }} °C
+                    </h2>
+                  </div>
+
+                  <div class="flex-container">
+                    <div class="p">
+                      <span class="control p"
+                        >MÁX:
+                        {{ forecast.temp_maxMedia | number: "1.2-2" }} C°</span
+                      >
+                    </div>
+                    <div class="p">
+                      <span class="control p p-left"
+                        >MIN:
+                        {{ forecast.temp_minMedia | number: "1.2-2" }} C°</span
+                      >
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

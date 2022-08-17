@@ -1,0 +1,131 @@
+<section class="hero is-medium is-blue">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-5">
+          <div class="column">
+            <div class="field">
+              <label class="label">PESQUISE O CLIMA DE SUA CIDADE</label>
+            </div>
+            <form
+              class="control is-expanded flex-container is-flex-direction-row"
+            >
+              <input
+                #cidade
+                id="cidade_"
+                class="input is-medium"
+                type="text"
+                placeholder="Goiânia, BR"
+                required
+                autocomplete="off"
+              />
+              <button
+                (click)="onSubmit(cidade.value)"
+                (click)="cidade.value = ''"
+                type="submit"
+                class="button is-medium"
+              >
+                <span class="icon is-blue-font">
+                  <i class="fas fa-search fa-lg"></i>
+                </span>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero is-negative">
+  <div class="hero-body">
+    <div class="container">
+      <div
+        *ngFor="let weather of weatherArray"
+        class="columns is-mobile is-centered"
+      >
+        <div id="isDay" *ngIf="weather.isDay" class="column is-half">
+          <div class="columns is-gapless shadow-card is-day">
+            <article class="column is-4 is-day card-weather-left">
+              <div class="content">
+                <img
+                  class="image-container"
+                  src="http://openweathermap.org/img/wn/{{
+                    weather.icon
+                  }}@2x.png"
+                  alt=""
+                />
+              </div>
+            </article>
+            <div class="column card-weather-right">
+              <article class="card-content">
+                <div class="content h1-day">
+                  <h1 class="h1-day">
+                    {{ weather.name }},{{ weather.country }}
+                  </h1>
+                </div>
+                <div class="content h2-day">
+                  <h2 class="h2-day">{{ weather.temp }} °C</h2>
+                </div>
+
+                <div class="flex-container">
+                  <div class="p">
+                    <span class="control p"
+                      >MÁX: {{ weather.temp_max }} C°</span
+                    >
+                  </div>
+                  <div class="p">
+                    <span class="control p p-left"
+                      >MIN: {{ weather.temp_min }} C°</span
+                    >
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+
+        <div id="isNight" *ngIf="!weather.isDay" class="column is-half">
+          <div class="columns is-gapless shadow-card is-night">
+            <article class="column is-4 is-night card-weather-left">
+              <div class="content">
+                <img
+                  class="image-container"
+                  src="http://openweathermap.org/img/wn/{{
+                    weather.icon
+                  }}@2x.png"
+                  alt=""
+                />
+              </div>
+            </article>
+            <div class="column card-weather-right">
+              <article class="card-content">
+                <div class="content h1-night">
+                  <h1 class="h1-night">
+                    {{ weather.name }},{{ weather.country }}
+                  </h1>
+                </div>
+                <div class="content h2-night">
+                  <h2 class="h2-night">{{ weather.temp }} °C</h2>
+                </div>
+
+                <div class="flex-container">
+                  <div class="p">
+                    <span class="control p"
+                      >MÁX: {{ weather.temp_max }} C°</span
+                    >
+                  </div>
+                  <div class="p">
+                    <span class="control p p-left"
+                      >MIN: {{ weather.temp_min }} C°</span
+                    >
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
